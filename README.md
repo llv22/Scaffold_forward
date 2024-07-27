@@ -27,7 +27,7 @@ The prompt refer to Line 109 and Line 122 in [call-api.py](call-api.py).
 DASHSCOPE_API_KEY=<Your Key>
 ```
 
-2. Sample code get_response() in qianwen.py
+2. Sample code get_response() in [qianwen.py](qianwen.py)
 
 ## Author
 
