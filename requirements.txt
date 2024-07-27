@@ -3,3 +3,4 @@ pillow
 requests
 tenacity
 tqdm
+python-dotenv

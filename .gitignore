@@ -3,3 +3,5 @@ __pycache__
 log
 tmp*
 .DS_Store
+.env
+*_dots.jpg

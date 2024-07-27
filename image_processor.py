@@ -2,6 +2,8 @@ from PIL import Image, ImageDraw, ImageFont
 import os
 from tqdm import tqdm
 
+import argparse
+
 def dot_matrix_two_dimensional(image_path, save_path, dots_size_w, dots_size_h):
     """
     takes an original image as input, save the processed image to save_path. Each dot is labeled with two-dimensional Cartesian coordinates (x,y). Suitable for single-image tasks.
@@ -141,22 +143,31 @@ def get_img_files(dir_):
                 img_files.append(os.path.join(root, file))
     return img_files
 
-def process_imgs_dir(dir_):
+def process_imgs_dir(args):
     """
     process all the images in the target directory: generate all the dots overlaid images
     """
+    dir_, grid_size_w, grid_size_h, postfix = args.img_dir, args.grid_size_w, args.grid_size_h, args.postfix
     imgs = get_img_files(dir_)
     imgs = [file for file in imgs if file.endswith(".jpg") and "dots" not in file] # avoid regenerate dots images
     print(">>> find", len(imgs), "images in total.")
     for img_path in tqdm(imgs):
-        save_path = img_path.replace(".jpg", f"_dots.jpg")
-        grid_size_w, grid_size_h = 6, 6
+        save_path = img_path.replace(".jpg", postfix)
         try:
             dot_matrix_two_dimensional(img_path, save_path, grid_size_w, grid_size_h)
         except Exception as e:
             print(f">>> encounterd exceptions: ", e, "when processing image", img_path)
             continue      
 
+def conf():
+    args = argparse.ArgumentParser()
+    args.add_argument("--img_dir", type=str, default="data/examples")
+    args.add_argument("--grid_size_w", type=int, default=6)
+    args.add_argument("--grid_size_h", type=int, default=6)
+    args.add_argument("--postfix", type=str, default="_dots.jpg")
+    return args.parse_args()
+
 if __name__=="__main__":
-    # TODO process your images here before querying the LMM, an example is as follow.
-    process_imgs_dir("data/examples")
+    # preprocessing all the images in the target directory
+    args = conf()
+    process_imgs_dir(args)
