@@ -11,7 +11,7 @@ pip install -r requirements.txt
 
 ## 2. Scaffolding
 
-preprocessing for data run
+Preprocessing for data run
 
 ```bash
 python image_processor.py --img_dir "<your folder input>"
@@ -19,9 +19,13 @@ python image_processor.py --img_dir "<your folder input>"
 
 The prompt refer to Line 109 and Line 122 in [call-api.py](call-api.py).
 
+## 3. Output coordination
+
+Check [dot_matrix_two_dimensional_with_click.py](dot_matrix_two_dimensional_with_click.py).
+
 ## 3, QuestionVL API
 
-1. create .env on the root folder add
+1. Create .env on the root folder add
 
 ```txt
 DASHSCOPE_API_KEY=<Your Key>
